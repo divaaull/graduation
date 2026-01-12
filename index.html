@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Ciee Lulus 🎓</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e48dc3, #ffebf1);
+            font-family: 'Poppins', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* ===== AMPL0P ===== */
+        .envelope-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e48dc3, #ffebf1);
+            z-index: 10;
+        }
+
+        .envelope {
+            width: 260px;
+            height: 170px;
+            background: #fff;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: #f3c1d9;
+            clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+            border-radius: 12px;
+        }
+
+        .envelope-text {
+            position: absolute;
+            bottom: 14px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #7a2f5b;
+        }
+
+        .open-hint {
+            margin-top: 14px;
+            font-size: 13px;
+            color: #7a2f5b;
+            text-align: center;
+        }
+
+        .hide {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        /* ===== CARD ===== */
+        .card {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            padding: 28px 22px;
+            border-radius: 18px;
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            animation: fadeIn 1s ease;
+            display: none;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #5c2b5e;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        button {
+            margin-top: 16px;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: #e48dc3;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .confetti {
+            position: fixed;
+            top: 0;
+            width: 6px;
+            height: 6px;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- AMPL0P -->
+<div class="envelope-screen" id="envelopeScreen">
+    <div>
+        <div class="envelope" onclick="openLetter()">
+            <div class="envelope-text">For You</div>
+        </div>
+        <div class="open-hint">Tap untuk membuka</div>
+    </div>
+</div>
+
+<!-- ISI (KATA-KATA TIDAK DIUBAH) -->
+<div class="card" id="card">
+    <h1>🎓 CIEEE LULUS 🎓</h1>
+    <p>
+        Ciee akhirnya resmi<br>
+        <b>Adinda Thalia Syalsadila  S. Ak</b>✨<br><br>
+    </p>
+    <p>
+        Semoga ke depannya hidup kak dilz  
+        selalu <b>balance</b>,  
+        rezekinya lancar,  
+        dan kebahagiaannya ga pernah minus ✨
+        btw jangan lupa revisinya kak dilzz hehe
+    </p>
+    <p><b>Selamat yaa kak dilzz 💐</b></p>
+
+    <button onclick="buatConfetti()">🎉 Rayain Dulu</button>
+</div>
+
+<!-- AUDIO -->
+<audio id="musik">
+    <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openLetter() {
+    document.getElementById("envelopeScreen").classList.add("hide");
+
+    // lagu mulai pas amplop dibuka
+    document.getElementById("musik").play();
+
+    setTimeout(() => {
+        document.getElementById("envelopeScreen").style.display = "none";
+        document.getElementById("card").style.display = "block";
+    }, 600);
+}
+
+function buatConfetti() {
+    for (let i = 0; i < 40; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.backgroundColor =
+            `hsl(${Math.random() * 360}, 80%, 70%)`;
+        c.style.animationDuration =
+            Math.random() * 2 + 2 + "s";
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
